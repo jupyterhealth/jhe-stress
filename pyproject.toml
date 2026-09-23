@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=77", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jhe-stress"
+version = "0.0.1.dev"
+dynamic = ["readme"]
+description = "Stress test JupyterHealth Exchange"
+authors = [
+  { name = "JupyterHealth Contributors", email = "jupyter@googlegroups.com" },
+]
+keywords = ["Jupyter"]
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+dependencies = [
+  "click",
+  "jupyterhealth-client",
+  "tqdm",
+]
+
+[tool.setuptools]
+zip-safe = false
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = [""]
+include = ["jupyterhub*"]
+
+# dynamic sources of metadata in other files
+[tool.setuptools.dynamic]
+readme = { file = "README.md", content-type = "text/markdown" }
+
+# setuptools_scm needs a section to be present
+[tool.setuptools_scm]
+# we don't actually use setuptools_scm for versions,
+# only the file-finder
+fallback_version = "0.0.0"
+
+# linters and autoformatters
+[tool.autoflake]
+ignore-init-module-imports = true
+remove-all-unused-imports = true
+remove-duplicate-keys = true
+remove-unused-variables = false
+
+[tool.black]
+
+[tool.isort]
+profile = "black"
